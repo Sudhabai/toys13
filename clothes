@@ -1,0 +1,26 @@
+function groupAndCountCategories(categories) {
+  // Step 1: Use reduce() to count occurrences of each category
+  const categoryCounts = categories.reduce((acc, category) => {
+    if (acc[category]) {
+      acc[category] += 1;  // Increment the count for existing category
+    } else {
+      acc[category] = 1;    // Initialize count for new category
+    }
+    return acc;
+  }, {});
+
+  // Step 2: Extra Challenge: Sort the categories by count in descending order
+  const sortedCategories = Object.entries(categoryCounts)
+    .sort((a, b) => b[1] - a[1])  // Sort by the count (second element of the array)
+    .map(entry => entry[0]);       // Extract only the category names
+
+  // Step 3: Return the sorted array of category names
+  return sortedCategories;
+}
+
+// Example input
+const categories = ["electronics:2", "clothing:2", "electronics:2", "toys:3", "clothing:2", "toys:3"];
+
+// Call the function with the example input
+const result = groupAndCountCategories(categories);
+console.log(result);  // Output: ["toys", "electronics", "clothing"]
